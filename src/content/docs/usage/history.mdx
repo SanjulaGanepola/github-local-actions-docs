@@ -18,10 +18,11 @@ The `History` view is where you can browse and manage workflows currently being 
 
 ## Browse History Entries
 
-History entries are created every time a workflow or job is executed. Each of these entries use the following naming convention:
+History entries are created every time a workflow, job, or event is executed. Each of these entries use the following naming convention:
 
 * **Workflow History**: `<workflow_name> #<id>`
 * **Job History** `<workflow_name>/<job_name> #<id>`
+* **Event History**: `<workflow_name> (<event_name>) #<id>`
 
 :::danger
 All history is stored in VS Code storage in such a way that it uses the path of the workspace folder to locate all relevant history entries. This means that changing the path of your project can result in history entries not being found.

@@ -56,10 +56,10 @@ act --workflows ".github/workflows/<workflow_file_name>.yaml" --job "<job_id>" -
 
 GitHub events are used to configure workflows to run when specific activities happen on GitHub. These same events can be simulated to run multiple workflows locally. To run an event, use the `Run Event` action on the `Workflows` view which will prompt you for the event to trigger. Individual VS Code tasks will be started and history entries will be created for each workflow in the workspace that is set to be triggered by that event.
 
-The `act` command which will be used will be the exact same as the first two cases (again assuming no <a href="/github-local-actions-docs/usage/settings">settings</a> are being used).
+The `act` command which will be used is similar to the first two cases (again assuming no <a href="/github-local-actions-docs/usage/settings">settings</a>), except it will also include the event name in the command.
 
 ```sh
-act --workflows ".github/workflows/<workflow_file_name>.yaml" --secret-file "" --var-file "" --input-file "" --eventpath ""
+act <event_name> --workflows ".github/workflows/<workflow_file_name>.yaml" --secret-file "" --var-file "" --input-file "" --eventpath ""
 ```
 
 :::tip
