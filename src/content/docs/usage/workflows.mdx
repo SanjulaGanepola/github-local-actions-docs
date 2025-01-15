@@ -38,6 +38,10 @@ The `act` command which will be used is the exact same as the previous one (agai
 act --workflows ".github/workflows/<workflow_file_name>.yaml" --secret-file "" --var-file "" --input-file "" --eventpath ""
 ```
 
+:::tip
+If you have a workflow opened in the editor, you can quickly run it using the `ctrl+g` (Windows) or `cmd+g` (MacOS) keybinding.
+:::
+
 ![Run Single Workflow](../../../assets/run-single-workflow.png)
 
 ## Run Job
@@ -64,7 +68,6 @@ act <event_name> --workflows ".github/workflows/<workflow_file_name>.yaml" --sec
 
 :::tip
 When running certain events, you may require event properties to be defined because their values are used in your workflow. Click <a href="/github-local-actions-docs/usage/settings#payloads">here</a> to learn how to define these properties as an event payload.
-
 :::
 
 ![Run Event](../../../assets/run-event.png)
