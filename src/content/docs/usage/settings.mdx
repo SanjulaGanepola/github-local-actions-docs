@@ -28,7 +28,7 @@ Secrets of the format `${{ secrets.mySecret }}` are extracted from all workflow 
 All secrets are stored safely in VS Code's [SecretStorage](https://code.visualstudio.com/api/references/vscode-api#SecretStorage) so they can be persisted after closing your workspace.
 :::
 
-An alternative to assigning values to these secrets in the `Settings` view is to use the `Create Secret File` action to create a file for storing these secrets. This file should use the Ruby's gem [dotenv](https://github.com/bkeepers/dotenv) format as act uses the [godotenv](https://github.com/joho/godotenv) library to parse these types of files.
+An alternative to assigning values to these secrets in the `Settings` view is to use the `Create Secret File` action to create a file for storing these secrets (default file name is `.secrets`). This file should use the Ruby's gem [dotenv](https://github.com/bkeepers/dotenv) format as act uses the [godotenv](https://github.com/joho/godotenv) library to parse these types of files.
 
 Example `.secrets` file:
 
@@ -52,14 +52,14 @@ If you have matching repository or environment variables defined in GitHub and w
 
 ![Import from GitHub](../../../assets/import-from-github.png)
 
-Similar to the secrets file, an alternative is to use the `Create Variable File` action to create a file for storing variable values. This file should also use the Ruby's gem [dotenv](https://github.com/bkeepers/dotenv) format as act uses the [godotenv](https://github.com/joho/godotenv) library to parse these types of files too.
+Similar to the secrets file, an alternative is to use the `Create Variable File` action to create a file for storing variable values (default file name is `.vars`). This file should also use the Ruby's gem [dotenv](https://github.com/bkeepers/dotenv) format as act uses the [godotenv](https://github.com/joho/godotenv) library to parse these types of files too.
 
 Example `.vars` file:
 
 ```ini
 export myVariable='my-variable-value'
 JSON="{\n\"name\": \"value\"\n}"
-MY_VARIABLE=SOME_VARIABLE_VALUE
+SOME_VARIABLE=SOME_VARIABLE_VALUE
 ```
 
 Although you can also use the `Locate Variable Files` to load in multiple existing files just like you can with secrets, you can only select one to be used for execution. Upon selecting one and running a GitHub Action, act will include it using the `--var-file` option which specifies the path to the variable file.
@@ -71,8 +71,12 @@ Click [here](https://nektosact.com/usage/index.html#vars) to learn more about ho
 Inputs of the format `{{ inputs.myInput }}` and `{{ github.event.inputs.myInput }}` are extracted from all workflow files and shown in the `Settings` view. The features for managing these inputs are very similar to the features for managing [variables](#variables) described above. Refer to that section for more details and note the following differences:
 
 * Act will use the `--input` option which specifies the value for an input (ie. `--input myInput=myValue`).
-* Act will use the `--input-file` option which specifies the path to an input file.
-* The default input file name is `.input`.
+* Act will use the `--input-file` option which specifies the path to an input file (default file name is `.input`). Example `.input` file:
+  ```ini
+  export myInput='my-input-value'
+  JSON="{\n\"name\": \"value\"\n}"
+  SOME_INPUT=SOME_INPUT_VALUE
+  ```
 * Instead of using an input file, inputs can also be specified in a [payload](#payloads) file as well. Refer to this example JSON payload file named `payload.json`:
   ```json
   {
