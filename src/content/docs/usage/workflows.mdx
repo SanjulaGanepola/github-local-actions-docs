@@ -16,6 +16,14 @@ The `Workflows` view is where you can manage and run workflows as VS Code tasks.
 
 ---
 
+## Workflow Discovery
+
+The `Workflows Directory` configuration defined in the [VS Code Settings](https://code.visualstudio.com/docs/getstarted/settings) is what is used by the extension to search for your workflows. By default this is set to `.github/workflows`, but it can be configured in the VS Code Settings by searching for the following configuration:
+
+```log
+@ext:sanjulaganepola.github-local-actions githubLocalActions.workflowsDirectory
+```
+
 ## Run All Workflows
 
 To simply run all workflows in the workspace, use the `Run All Workflows` action on the `Workflows` view. This will start up individual VS Code tasks for each workflow defined in your `.github/workflows` folder and create separate entries in the <a href="/github-local-actions-docs/usage/history">History</a> view.
