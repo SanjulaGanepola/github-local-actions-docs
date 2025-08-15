@@ -1,7 +1,25 @@
 ---
 title: Artifacts and Cache
 description: Overview of how artifacts and cache are handled.
-banner:
-  content: |
-    This page is work in progress!
 ---
+
+## Configuration
+
+To use artifact-related actions like `actions/upload-artifact` or `actions/cache`, you need to configure an artifact server path.
+
+### Setting up the artifact server
+
+1. Open the extension sidebar
+2. Navigate to **Settings** > **Options**
+3. Click the **+** button
+4. Search for `artifact-server-path`
+5. Set the value to `/tmp/artifacts`
+6. Save the configuration
+7. Select the option to include it in your next run
+
+### Why is this needed?
+
+GitHub Actions provides environment variables (`ACTIONS_RUNTIME_TOKEN`, `ACTIONS_RUNTIME_URL`, `ACTIONS_CACHE_URL`) that artifact actions rely on. When running locally, these are not available by default. The `--artifact-server-path` option configures a local artifact server to handle these operations.
+
+Without the artifact server configuration, this workflow will fail with:
+❗ ::error::Unable to get the ACTIONS_RUNTIME_TOKEN env variable
