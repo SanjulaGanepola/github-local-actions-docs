@@ -13,7 +13,10 @@ To use artifact-related actions like `actions/upload-artifact` or `actions/cache
 2. Navigate to **Settings** > **Options**
 3. Click the **+** button
 4. Search for `artifact-server-path`
-5. Set the value to `/tmp/artifacts`
+5. Set the value to a local directory path appropriate for your OS, for example:
+    - Linux/macOS: `/tmp/artifacts`
+    - Windows: `%TEMP%\artifacts`
+    Ensure the directory exists and is writeable.
 6. Save the configuration
 7. Select the option to include it in your next run
 
@@ -21,5 +24,7 @@ To use artifact-related actions like `actions/upload-artifact` or `actions/cache
 
 GitHub Actions provides environment variables (`ACTIONS_RUNTIME_TOKEN`, `ACTIONS_RUNTIME_URL`, `ACTIONS_CACHE_URL`) that artifact actions rely on. When running locally, these are not available by default. The `--artifact-server-path` option configures a local artifact server to handle these operations.
 
-Without the artifact server configuration, this workflow will fail with:
+Without the artifact server configuration, this workflow will fail with an error in the logs similar to:
+```text:
 ❗ ::error::Unable to get the ACTIONS_RUNTIME_TOKEN env variable
+```
