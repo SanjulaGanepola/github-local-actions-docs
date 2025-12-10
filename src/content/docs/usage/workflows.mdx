@@ -12,7 +12,17 @@ The `Workflows` view is where you can manage and run workflows as VS Code tasks.
    <LinkCard title="📜 Run Single Workflow" href="#run-single-workflow" description="Run a single workflow in the workspace."/>
    <LinkCard title="🚀 Run Job" href="#run-job" description="Run a specific job in a workflow."/>
    <LinkCard title="⚡ Run Event" href="#run-event" description="Run multiple workflows using a GitHub event."/>
+   <LinkCard title="📌 Run Workflow Event" href="#run-workflow-event" description="Run a specific event on a single workflow."/>
+   <LinkCard title="🧩 Run Job Event" href="#run-job-event" description="Run a specific event on a single job."/>
 </CardGrid>
+
+## Accessing Workflow Commands
+
+You can access the workflow and job commands in several convenient ways:
+
+- **View header buttons**: Use the buttons in the Workflows view header for workspace-wide commands (like "Run All Workflows")
+- **Hover actions**: Hover over a workflow or job to see inline action buttons that appear on the right side
+- **Right-click menu**: Right-click on a workflow or job to open a context menu with available commands
 
 ---
 
@@ -81,3 +91,42 @@ When running certain events, you may require event properties to be defined beca
 :::
 
 ![Run Event](../../../assets/run-event.png)
+
+## Run Workflow Event
+
+The `Run Workflow with Event` action allows you to trigger a specific GitHub event on a single workflow file. This is useful when you need to test how a specific workflow responds to a particular event.
+
+To run a workflow with an event:
+
+1. Locate the workflow in the `Workflows` view
+2. Click the `Run Workflow with Event` button (event icon) in the inline actions or right-click and select it from the context menu
+3. Select the event type from the dropdown of events registered in the workflow's `on` section
+4. The workflow will run with the selected event type
+
+The `act` command used will include both the event name and target the specific workflow file:
+
+```sh
+act <event_name> --workflows ".github/workflows/<workflow_file_name>.yaml" --secret-file "" --var-file "" --input-file "" --eventpath ""
+```
+
+## Run Job Event
+
+The `Run Job with Event` action provides even more granular control by allowing you to trigger a specific GitHub event on a single job within a workflow. This is useful when you need to test how a specific job responds to a particular event.
+
+To run a job with an event:
+
+1. Expand a workflow to see its jobs
+2. Locate the specific job you want to run
+3. Click the `Run Job with Event` button (event icon) in the inline actions or right-click and select it from the context menu
+4. Select the event type from the dropdown of events registered in the parent workflow's `on` section
+5. The job will run with the selected event type
+
+The `act` command used will include the event name, target the specific workflow file, and specify the job ID:
+
+```sh
+act <event_name> --workflows ".github/workflows/<workflow_file_name>.yaml" --job "<job_id>" --secret-file "" --var-file "" --input-file "" --eventpath ""
+```
+
+:::tip
+Running a workflow or job with a specific event will only execute if that event is registered in the workflow's `on` section. If the selected event isn't configured for the workflow, you'll receive an error message.
+:::
