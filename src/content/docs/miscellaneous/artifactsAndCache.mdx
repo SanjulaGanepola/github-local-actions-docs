@@ -1,7 +1,44 @@
 ---
 title: Artifacts and Cache
 description: Overview of how artifacts and cache are handled.
-banner:
-  content: |
-    This page is work in progress!
 ---
+
+## Configuration
+
+To use artifact-related actions like `actions/upload-artifact`, you need to configure an artifact server path.
+
+### Configuration Options
+
+The following options can be configured to set up local artifact and cache servers:
+
+| Option | Description |
+|--------|-------------|
+| `--artifact-server-addr` | Defines the address to which the artifact server binds |
+| `--artifact-server-path` | Defines the path where the artifact server stores uploads and retrieves downloads from. If not specified, the artifact server will not start |
+| `--artifact-server-port` | Defines the port where the artifact server listens |
+| `--cache-server-addr` | Defines the address to which the cache server binds |
+| `--cache-server-path` | Defines the path where the cache server stores caches |
+| `--cache-server-port` | Defines the port where the cache server listens. 0 means a randomly available port |
+
+### Setting up artifact and cache servers
+
+1. Open the extension sidebar
+2. Navigate to **Settings** > **Options**
+3. Click the **+** button to add a new option
+4. Add the desired configuration options from the table above
+5. For each option, set an appropriate value
+6. Save the configuration
+7. Select the options to include them in your next run
+
+### Why is this needed?
+
+GitHub Actions provides environment variables (`ACTIONS_RUNTIME_TOKEN`, `ACTIONS_RUNTIME_URL`, `ACTIONS_CACHE_URL`) that artifact actions rely on. When running locally, these are not available by default. The `--artifact-server-path` option configures a local artifact server to handle these operations.
+
+Without the artifact server configuration, this workflow will fail with an error in the logs similar to:
+```text
+❗ ::error::Unable to get the ACTIONS_RUNTIME_TOKEN env variable
+```
+
+### Additional Resources
+
+For more detailed information about configuring artifacts in act, refer to the [act documentation on action artifacts](https://nektosact.com/usage/index.html?highlight=artif#action-artifacts).
