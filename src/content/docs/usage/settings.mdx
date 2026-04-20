@@ -45,7 +45,7 @@ Click [here](https://nektosact.com/usage/index.html#secrets) to learn more about
 
 ## Variables
 
-Variables of the format `${{ secrets.myVariable }}` are extracted from all workflow files and shown in the `Settings` view. These variables can be assigned a value using the *Edit* action just like secrets and must be checked for it to be used during execution. During execution, act will include them using the `--var` option which specifies the value for a variable (ie. `--var myVariable=myValue`).
+Variables of the format `${{ vars.myVariable }}` are extracted from all workflow files and shown in the `Settings` view. These variables can be assigned a value using the *Edit* action just like secrets and must be checked for it to be used during execution. During execution, act will include them using the `--var` option which specifies the value for a variable (ie. `--var myVariable=myValue`).
 
 
 If you have matching repository or environment variables defined in GitHub and would like to use the same values locally, you can use the `Import from GitHub` action to authenticate and load these values into the `Settings` view. You must ensure your GitHub account has the adequate authority to access these variables to use this action.
